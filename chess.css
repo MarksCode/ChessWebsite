@@ -1,0 +1,195 @@
+body{
+	background-color: #F0F8FF;	
+}
+
+#tableWrap{
+	zoom: 0.7;
+	margin: auto;
+}
+
+#buttonWrap{
+	text-align: center;
+}
+
+td {
+	height:100px;
+	width:100px;
+	padding:0px;
+	border:2px solid black;
+	vertical-align: middle;
+}
+
+table{
+	height:5px;
+	border:2px solid black;
+	border-collapse: collapse;
+	margin:auto;
+}
+h1{
+	text-align: center;
+	font-family: verdana;
+}
+
+h3{
+	text-align: center;
+	font-family: verdana;
+}
+
+.light{
+	background-color: #F0F8FF;
+}
+
+.dark{
+	background-color: #A0522D;
+}
+
+.selected {
+	background-color: #0099FF;
+}
+
+.makeRed {
+	color: red;
+}
+
+.pawnB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Pawn2.png");
+}
+
+.pawnA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Pawn1.png");
+}
+
+.rookA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 85%;
+	background-image: url("Pics/Rook1.png")
+}
+
+.rookB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 85%;
+	background-image: url("Pics/Rook2.png")
+}
+
+.bishopA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Bishop1.png")
+}
+
+.bishopB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Bishop2.png")
+}
+
+.knightA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Knight1.png");
+}
+
+.knightB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Knight2.png");
+}
+
+.queenA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Queen1.png");
+}
+
+.queenB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/Queen2.png");
+}
+
+.kingA{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/King1.png");
+}
+
+.kingB{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 75%;
+	background-image: url("Pics/King2.png");
+}
+
+.Letter{
+	background-color: #700000;
+	height: 20px;
+	text-align: center;
+	font-family: verdana;
+	color: white;
+	border: 0;
+}
+
+.Numbers{
+	background-color: #700000;
+	font-family: verdana;
+	color: white;
+	width:20px;
+	text-align: center;
+	border: 0;
+}
+
+.corner{
+	width: 20px;
+	height: 20px;
+	background-color: #700000;
+	border: 0;
+}
+
+button{
+	border: 2px solid #0a3c59;
+	background: #3e779d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#65a9d7), to(#3e779d));
+	background: -webkit-linear-gradient(top, #65a9d7, #3e779d);
+	background: -moz-linear-gradient(top, #65a9d7, #3e779d);
+	background: -ms-linear-gradient(top, #65a9d7, #3e779d);
+	background: -o-linear-gradient(top, #65a9d7, #3e779d);
+	background-image: -ms-linear-gradient(top, #65a9d7 0%, #3e779d 100%);
+	padding: 10.5px 21px;
+	-webkit-border-radius: 16px;
+	-moz-border-radius: 16px;
+	border-radius: 16px;
+	text-shadow: #7ea4bd 0 1px 0;
+	color: #06426c;
+	font-size: 22px;
+	font-family: helvetica, serif;
+	text-decoration: none;
+	vertical-align: middle;
+		
+}
+button:active {
+	text-shadow: #1e4158 0 1px 0;
+	border: 2px solid #0a3c59;
+	background: #65a9d7;
+	background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#3e779d));
+	background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+	background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+	background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+	background: -o-linear-gradient(top, #3e779d, #65a9d7);
+	background-image: -ms-linear-gradient(top, #3e779d 0%, #65a9d7 100%);
+	color: #fff;
+	}

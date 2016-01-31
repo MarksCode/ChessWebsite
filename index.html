@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Chess</title>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="chess.css"/>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+		<script src="ChessLogic2.js"></script>
+	</head>
+	<body>
+	
+		<h1>Let's play Chess!</h1>
+		<h3>By Ron Marks</h3>
+		<div>
+		<table id="tableWrap">
+		
+			<tr><td class = "corner"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "Letter"></td><td class = "corner"></td></tr>
+			
+			<!-- Row 1 -->
+			<tr><td class = "Numbers">8</td><td row = "0" col = "0" id = "1" data-chess-piece="rookB" class="square rookB light"></td><td row = "0" col = "1" id = "2" data-chess-piece="knightB" class="square knightB dark" ></td><td row = "0" col = "2" id = "3" data-chess-piece="bishopB" class="square bishopB light"></td><td row = "0" col = "3" id = "4" data-chess-piece="queenB" class="square queenB dark"></td><td row = "0" col = "4" id = "5" data-chess-piece="kingB" class="square kingB light"></td><td row = "0" col = "5" id = "6" data-chess-piece="bishopB" class="square bishopB dark"></td><td row = "0" col = "6" id = "7" data-chess-piece="knightB" class="square knightB light"></td><td row = "0" col = "7" id = "8" data-chess-piece="rookB" class="square rookB dark"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 2 -->
+			<tr><td class = "Numbers">7</td><td row = "1" col = "0" id = "9" data-chess-piece="pawnB" class="square pawnB dark"></td><td row = "1" col = "1" id = "10" data-chess-piece="pawnB" class="square pawnB light"></td><td row = "1" col = "2" id = "11" data-chess-piece="pawnB" class="square pawnB dark"></td><td row = "1" col = "3" id = "12" data-chess-piece="pawnB" class="square pawnB light"></td><td row = "1" col = "4" id = "13" data-chess-piece="pawnB" class="square pawnB dark"></td><td row = "1" col = "5" id = "14" data-chess-piece="pawnB" class="square pawnB light"></td><td row = "1" col = "6" id = "15" data-chess-piece="pawnB" class="square pawnB dark"></td><td row = "1" col = "7" id = "16" data-chess-piece="pawnB" class="square pawnB light"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 3 -->
+			<tr><td class = "Numbers">6</td><td row = "2" col = "0" id = "17" data-chess-piece="none" class="square light"></td><td row = "2" col = "1" id = "18" data-chess-piece="none" class="square dark"></td><td row = "2" col = "2" id = "19" data-chess-piece="none" class="square light"></td><td row = "2" col = "3" id = "20" data-chess-piece="none" class="square dark"></td><td row = "2" col = "4" id = "21" data-chess-piece="none" class="square light"></td><td row = "2" col = "5" id = "22" data-chess-piece="none" class="square dark"></td><td row = "2" col = "6" id = "23" data-chess-piece="none" class="square light"></td><td row = "2" col = "7" id = "24" data-chess-piece="none" class="square dark"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 4 -->
+			<tr><td class = "Numbers">5</td><td row = "3" col = "0" id = "25" data-chess-piece="none" class="square dark"></td><td row = "3" col = "1" id = "26" data-chess-piece="none" class="square light"></td><td row = "3" col = "2" id = "27" data-chess-piece="none" class="square dark"></td><td row = "3" col = "3" id = "28" data-chess-piece="none" class="square light"></td><td row = "3" col = "4" id = "29" data-chess-piece="none" class="square dark"></td><td row = "3" col = "5" id = "30" data-chess-piece="none" class="square light"></td><td row = "3" col = "6" id = "31" data-chess-piece="none" class="square dark"></td><td row = "3" col = "7" id = "32" data-chess-piece="none" class="square light"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 5 -->
+			<tr><td class = "Numbers">4</td><td row = "4" col = "0" id = "33" data-chess-piece="none" class="square light"></td><td row = "4" col = "1" id = "34" data-chess-piece="none" class="square dark"></td><td row = "4" col = "2" id = "35" data-chess-piece="none" class="square light"></td><td row = "4" col = "3" id = "36" data-chess-piece="none" class="square dark"></td><td row = "4" col = "4" id = "37" data-chess-piece="none" class="square light"></td><td row = "4" col = "5" id = "38" data-chess-piece="none" class="square dark"></td><td row = "4" col = "6" id = "39" data-chess-piece="none" class="square light"></td><td row = "4" col = "7" id = "40" data-chess-piece="none" class="square dark"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 6 -->
+			<tr><td class = "Numbers">3</td><td row = "5" col = "0" id = "41" data-chess-piece="none" class="square dark"></td><td row = "5" col = "1" id = "42" data-chess-piece="none" class="square light"></td><td row = "5" col = "2" id = "43" data-chess-piece="none" class="square dark"></td><td row = "5" col = "3" id = "44" data-chess-piece="none" class="square light"></td><td row = "5" col = "4" id = "45" data-chess-piece="none" class="square dark"></td><td row = "5" col = "5" id = "46" data-chess-piece="none" class="square light"></td><td row = "5" col = "6" id = "47" data-chess-piece="none" class="square dark"></td><td row = "5" col = "7" id = "48" data-chess-piece="none" class="square light"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 7 -->
+			<tr><td class = "Numbers">2</td><td row = "6" col = "0" id = "49" data-chess-piece="pawnA" class="square pawnA light"></td><td row = "6" col = "1" id = "50" data-chess-piece="pawnA" class="square pawnA dark"></td><td row = "6" col = "2" id = "51" data-chess-piece="pawnA" class="square pawnA light"></td><td row = "6" col = "3" id = "52" data-chess-piece="pawnA" class="square pawnA dark"></td><td row = "6" col = "4" id = "53" data-chess-piece="pawnA" class="square pawnA light"></td><td row = "6" col = "5" id = "54" data-chess-piece="pawnA" class="square pawnA dark"></td><td row = "6" col = "6" id = "55" data-chess-piece="pawnA" class="square pawnA light"></td><td row = "6" col = "7" id = "56" data-chess-piece="pawnA" class="square pawnA dark"></td><td class ="Numbers"></td></tr>
+			
+			<!-- Row 8 -->
+			<tr><td class = "Numbers">1</td><td row = "7" col = "0" id = "57" data-chess-piece="rookA" class="square rookA dark"></td><td row = "7" col = "1" id = "58" data-chess-piece="knightA" class="square knightA light"></td><td row = "7" col = "2" id = "59" data-chess-piece="bishopA" class="square bishopA dark"></td><td row = "7" col = "3" id = "60" data-chess-piece="queenA" class="square queenA light"></td><td row = "7" col = "4" id = "61" data-chess-piece="kingA" class="square kingA dark"></td><td row = "7" col = "5" id = "62" data-chess-piece="bishopA" class="square bishopA light"></td><td row = "7" col = "6" id = "63" data-chess-piece="knightA" class="square knightA dark"></td><td row = "7" col = "7" id = "64" data-chess-piece="rookA" class="square rookA light"></td><td class ="Numbers"></td></tr>
+			
+			<tr><td class = "corner"></td><td class = "Letter">A</td><td class = "Letter">B</td><td class = "Letter">C</td><td class = "Letter">D</td><td class = "Letter">E</td><td class = "Letter">F</td><td class = "Letter">G</td><td class = "Letter">H</td><td class = "corner"></td></tr>
+
+
+		</table>
+		</div>
+		<h3 id= "toMove">White to move</h3>
+		<h3 id= "checkText"></h3>
+		<div id="buttonWrap"><button id = "playAgain">Play Again?</button></div>
+	</body>
+</html>
