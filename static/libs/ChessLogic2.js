@@ -1,3 +1,5 @@
+var socket = io.connect("/");
+
 var main = function() {
 	
 //**********************//
@@ -558,8 +560,9 @@ var main = function() {
 // Checks if white bishop can block checkmate //
 //********************************************//
 	var WbishopCheck = function(i, y) {
-		var a = i+1; var b = i+1; var c = i-1; var d = i-1; c1 = 0; c2 = 0;
-		var e = y+1; var f = y-1; var g = y+1; var h = y-1; c3 = 0; c4 = 0;
+		resetBoards();
+		var a = i+1; var b = i+1; var c = i-1; var d = i-1; var c1 = 0; var c2 = 0;
+		var e = y+1; var f = y-1; var g = y+1; var h = y-1; var c3 = 0; var c4 = 0;
 		while(isDef(a, e, tempPositions) && c1 < 1){
 			Dr = a; Dc = e;
 			endPiece = tempPositions[Dr][Dc];
@@ -620,8 +623,9 @@ var main = function() {
 // Checks if black bishop can block checkmate //
 //********************************************//
 	var BbishopCheck = function(i, y) {
-		var a = i+1; var b = i+1; var c = i-1; var d = i-1; c1 = 0; c2 = 0;
-		var e = y+1; var f = y-1; var g = y+1; var h = y-1; c3 = 0; c4 = 0;
+		resetBoards();
+		var a = i+1; var b = i+1; var c = i-1; var d = i-1; var c1 = 0; var c2 = 0;
+		var e = y+1; var f = y-1; var g = y+1; var h = y-1; var c3 = 0; var c4 = 0;
 		while(isDef(a, e, tempPositions) && c1 < 1){
 			Dr = a; Dc = e;
 			endPiece = tempPositions[Dr][Dc];
@@ -682,6 +686,7 @@ var main = function() {
 // Checks if white rook can block checkmate //
 //******************************************//
 	var WrookCheck = function(i, y) {
+		resetBoards();
 		var c1 = 0; var c2 = 0; var c3 = 0; var c4 = 0;
 		var a = i-1; var b = i+1; var c = y+1; var d = y-1;
 		while(isDef(a, y, tempPositions) && c1 < 1){ // Up
@@ -746,6 +751,7 @@ var main = function() {
 // Checks if black rook can block checkmate //
 //******************************************//
 	var BrookCheck = function(i, y) {
+		resetBoards();
 		var c1 = 0; var c2 = 0; var c3 = 0; var c4 = 0;
 		var a = i-1; var b = i+1; var c = y+1; var d = y-1;
 		while(isDef(a, y, tempPositions) && c1 < 1){ // Up
@@ -1088,48 +1094,122 @@ var main = function() {
 //***************************************************//
 	var isCheckmate = function(){
 		if (whiteToMove){ // White to move
+			resetBoards();
+			tempPositions[kingWposI][kingWposY] = "N";
+			updateAttackedSquares(tempPositions, attackedPosTempW, attackedPosTempB);
 			if (isDef(kingWposI+1, kingWposY+1, positions)) // See if king can move into non-attacked square
-				if (attackedPosB[kingWposI+1][kingWposY+1] != "x" && $.inArray(positions[kingWposI+1][kingWposY+1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI+1][kingWposY+1] != "x" && $.inArray(positions[kingWposI+1][kingWposY+1], whitePieces) < 0){
+					if (attackedPosTempB[kingWposI+1][kingWposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI+1, kingWposY, positions))
-				if (attackedPosB[kingWposI+1][kingWposY] != "x" && $.inArray(positions[kingWposI+1][kingWposY], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI+1][kingWposY] != "x" && $.inArray(positions[kingWposI+1][kingWposY], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI+1][kingWposY] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI+1, kingWposY-1, positions))
-				if (attackedPosB[kingWposI+1][kingWposY-1] != "x" && $.inArray(positions[kingWposI+1][kingWposY-1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI+1][kingWposY-1] != "x" && $.inArray(positions[kingWposI+1][kingWposY-1], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI+1][kingWposY-1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI, kingWposY+1, positions))
-				if (attackedPosB[kingWposI][kingWposY+1] != "x" && $.inArray(positions[kingWposI][kingWposY+1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI][kingWposY+1] != "x" && $.inArray(positions[kingWposI][kingWposY+1], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI][kingWposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI, kingWposY-1, positions))
-				if (attackedPosB[kingWposI][kingWposY-1] != "x" && $.inArray(positions[kingWposI][kingWposY-1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI][kingWposY-1] != "x" && $.inArray(positions[kingWposI][kingWposY-1], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI][kingWposY-1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI-1, kingWposY+1, positions))
-				if (attackedPosB[kingWposI-1][kingWposY+1] != "x" && $.inArray(positions[kingWposI-1][kingWposY+1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI-1][kingWposY+1] != "x" && $.inArray(positions[kingWposI-1][kingWposY+1], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI-1][kingWposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI-1, kingWposY, positions))
-				if (attackedPosB[kingWposI-1][kingWposY] != "x" && $.inArray(positions[kingWposI-1][kingWposY], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI-1][kingWposY] != "x" && $.inArray(positions[kingWposI-1][kingWposY], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI-1][kingWposY] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingWposI-1, kingWposY-1, positions))
-				if (attackedPosB[kingWposI-1][kingWposY-1] != "x" && $.inArray(positions[kingWposI-1][kingWposY-1], whitePieces) < 0) return false;
+				if (attackedPosB[kingWposI-1][kingWposY-1] != "x" && $.inArray(positions[kingWposI-1][kingWposY-1], whitePieces) < 0) {
+					if (attackedPosTempB[kingWposI-1][kingWposY-1] != "x"){
+						return false;
+					}
+				}
 			for (var i = 0; i < 8; i++){ // Check remaining pieces
 				for (var y = 0; y < 8; y++){
-					if (!checkIfCheck(i, y)) return false; // Check if piece at location can stop checkmate
+					if (!checkIfCheck(i, y)) {
+						return false;
+					} // Check if piece at location can stop checkmate
 				}
 			}
 			return true; // Its Checkmate!	
 		} else { // Black to move
+			resetBoards();
+			tempPositions[kingBposI][kingBposY] = "N";
+			updateAttackedSquares(tempPositions, attackedPosTempW, attackedPosTempB);
 			if (isDef(kingBposI+1, kingBposY+1, positions)) // See if king can move into non-attacked square
-				if (attackedPosW[kingBposI+1][kingBposY+1] != "x" && $.inArray(positions[kingBposI+1][kingBposY+1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI+1][kingBposY+1] != "x" && $.inArray(positions[kingBposI+1][kingBposY+1], blackPieces) < 0){
+					if (attackedPosTempW[kingBposI+1][kingBposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI+1, kingBposY, positions))
-				if (attackedPosW[kingBposI+1][kingBposY] != "x" && $.inArray(positions[kingBposI+1][kingBposY], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI+1][kingBposY] != "x" && $.inArray(positions[kingBposI+1][kingBposY], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI+1][kingBposY] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI+1, kingBposY-1, positions))
-				if (attackedPosW[kingBposI+1][kingBposY-1] != "x" && $.inArray(positions[kingBposI+1][kingBposY-1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI+1][kingBposY-1] != "x" && $.inArray(positions[kingBposI+1][kingBposY-1], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI+1][kingBposY-1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI, kingBposY+1, positions))
-				if (attackedPosW[kingBposI][kingBposY+1] != "x" && $.inArray(positions[kingBposI][kingBposY+1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI][kingBposY+1] != "x" && $.inArray(positions[kingBposI][kingBposY+1], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI][kingBposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI, kingBposY-1, positions))
-				if (attackedPosW[kingBposI][kingBposY-1] != "x" && $.inArray(positions[kingBposI][kingBposY-1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI][kingBposY-1] != "x" && $.inArray(positions[kingBposI][kingBposY-1], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI][kingBposY-1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI-1, kingBposY+1, positions))
-				if (attackedPosW[kingBposI-1][kingBposY+1] != "x" && $.inArray(positions[kingBposI-1][kingBposY+1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI-1][kingBposY+1] != "x" && $.inArray(positions[kingBposI-1][kingBposY+1], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI-1][kingBposY+1] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI-1, kingBposY, positions))
-				if (attackedPosW[kingBposI-1][kingBposY] != "x" && $.inArray(positions[kingBposI-1][kingBposY], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI-1][kingBposY] != "x" && $.inArray(positions[kingBposI-1][kingBposY], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI-1][kingBposY] != "x"){
+						return false;
+					}
+				}
 			if (isDef(kingBposI-1, kingBposY-1, positions))
-				if (attackedPosW[kingBposI-1][kingBposY-1] != "x" && $.inArray(positions[kingBposI-1][kingBposY-1], blackPieces) < 0) return false;
+				if (attackedPosW[kingBposI-1][kingBposY-1] != "x" && $.inArray(positions[kingBposI-1][kingBposY-1], blackPieces) < 0) {
+					if (attackedPosTempW[kingBposI-1][kingBposY-1] != "x"){
+						return false;
+					}
+				}
 			for (var i = 0; i < 8; i++){ // Check remaining pieces
 				for (var y = 0; y < 8; y++){
-					if (!checkIfCheck(i, y)) return false; // Check if piece at location can stop checkmate
+					if (!checkIfCheck(i, y)){
+						return false; // Check if piece at location can stop checkmate
+					}
 				}
 			}
 			return true; // Its Checkmate!
@@ -1173,7 +1253,9 @@ var main = function() {
 	var castleWK = false; // White castling king side
 	var castleWQ = false; // White castling queen side
 	var checkMate = false;
-	
+	var myId = 0;
+	var sqrA;
+	var sqrB;
 	
 	
 //*********************************************************//
@@ -1182,15 +1264,32 @@ var main = function() {
 // then performs check to see if move is legal             //
 //*********************************************************//
 	$('.square').click(function(){
+		var r = parseInt($(this).attr('row'));
+		var c = parseInt($(this).attr('col'));
+		var i = parseInt($(this).attr('id'));
+		if (!checkMate){
+			if (whiteToMove && myId == 1) handleLogic(r, c, i);
+			if (!whiteToMove && myId == 2) handleLogic(r, c, i);
+		}
+	});
+	
+	
+//*****************************//
+// Handle Logic                //
+// Calls necessary validations //
+// upon requested move         //
+//*****************************//
+	function handleLogic(r, c, i){
 		if(!firstTouch && !checkMate){ // If user is pressing piece to be moved
-			Fr = parseInt($(this).attr('row'));
-			Fc = parseInt($(this).attr('col'));
+			Fr = r
+			Fc = c
 			if (positions[Fr][Fc] != "N"){ // Check user is pressing on piece
 				startPiece = positions[Fr][Fc]; 
 				if (whiteToMove){ // If white to move
 					if ($.inArray(startPiece, whitePieces) > -1){ // Makes sure player pressed white piece
+						sqrA = makeSquare(Fr, Fc, i);
 						firstTouch = true;
-						firstID = parseInt($(this).attr('id'));
+						firstID = i;
 						posStr = positions[Fr][Fc];
 						firstAttr = pieceDict[posStr][0]; // Get html attribute from piece dictionary
 						if($("#"+firstID).hasClass('light')) lastSqrColor = 'light';
@@ -1200,8 +1299,9 @@ var main = function() {
 					}
 				} else { // If black to move
 					if ($.inArray(startPiece, blackPieces) > -1){ // Makes sure player pressed black piece
+						sqrA = makeSquare(Fr, Fc, i);
 						firstTouch = true;
-						firstID = parseInt($(this).attr('id'));
+						firstID = i;
 						posStr = positions[Fr][Fc];
 						firstAttr = pieceDict[posStr][0]; // Get html attribute from piece dictionary
 						if($("#"+firstID).hasClass('light')) lastSqrColor = 'light';
@@ -1214,9 +1314,9 @@ var main = function() {
 		} else { // If user is pressing square to move piece
 			$("#"+firstID).removeClass('selected');
 			$("#"+firstID).addClass(lastSqrColor); // Turn piece square back to original color
-			Dr = parseInt($(this).attr('row'));
-			Dc = parseInt($(this).attr('col'));
-			destID = parseInt($(this).attr('id'));
+			Dr = r;
+			Dc = c;
+			destID = i;
 			posStr = positions[Dr][Dc];
 			endPiece = positions[Dr][Dc];
 			secondAttr = pieceDict[posStr][0];
@@ -1236,6 +1336,8 @@ var main = function() {
 				updateAttackedSquares(tempPositions, attackedPosTempW, attackedPosTempB); // Update attacked squares on temporary boards
 				if (whiteToMove){ // If white to move
 					if (!isCheck(attackedPosTempB, kingWposTempI, kingWposTempY)){ // Check if temporary move resulted in check --> no check
+						sqrB = makeSquare(Dr, Dc, i);
+						socket.emit("move", {sqrA, sqrB});
 						if (startPiece == "Wr" && Fc == 7) WrookMovedK = true;
 						if (startPiece == "Wr" && Fc == 0) WrookMovedQ = true;
 						if (startPiece == "Wking") WkingMoved = true;
@@ -1253,6 +1355,8 @@ var main = function() {
 					}
 				} else { // If black to move
 					if (!isCheck(attackedPosTempW, kingBposTempI, kingBposTempY)){ // Check if temporary move resulted in check --> no check
+						sqrB = makeSquare(Dr, Dc, i);
+						socket.emit("move", {sqrA, sqrB});
 						if (startPiece == "Br" && Fc == 7) BrookMovedK = true;
 						if (startPiece == "Br" && Fc == 0) BrookMovedQ = true;
 						if (startPiece == "Bking") BkingMoved = true;
@@ -1287,6 +1391,8 @@ var main = function() {
 				updateAttackedSquares(tempPositions, attackedPosTempW, attackedPosTempB);
 				if (whiteToMove){ // If white to move
 					if (!isCheck(attackedPosTempB, kingWposTempI, kingWposTempY)){ // Check move didn't put white king in check
+						sqrB = makeSquare(Dr, Dc, i);
+						socket.emit("move", {sqrA, sqrB});
 						if (startPiece == "Wr" && Fc == 7) WrookMovedK = true;
 						if (startPiece == "Wr" && Fc == 0) WrookMovedQ = true;
 						if (startPiece == "Wking") WkingMoved = true;
@@ -1305,6 +1411,8 @@ var main = function() {
 					}
 				} else { // If black to move
 					if (!isCheck(attackedPosTempW, kingBposTempI, kingBposTempY)){ // Check move didn't put black king in check
+						sqrB = makeSquare(Dr, Dc, i);
+						socket.emit("move", {sqrA, sqrB});
 						if (startPiece == "Br" && Fc == 7) BrookMovedK = true;
 						if (startPiece == "Br" && Fc == 0) BrookMovedQ = true;
 						if (startPiece == "Bking") BkingMoved = true;
@@ -1326,7 +1434,6 @@ var main = function() {
 				
 			}
 			firstTouch = false;
-			console.log(attackedPosB);
 			if (isCheck(attackedPosB, kingWposI, kingWposY)){ // Checks if move resulted in check
 				check = true;
 				$("#checkText").text("Check!");
@@ -1349,10 +1456,15 @@ var main = function() {
 					$("#playAgain").toggle();
 				}
 			}
-					
 		}
-	});
+	}
 	
+	
+//**************************//
+// Play Again               //
+// Resets board after user  //
+// clicks play again button //
+//**************************//	
 	$("#playAgain").click(function(){
 		initBoard();
 		whiteToMove = true;
@@ -1435,6 +1547,34 @@ var main = function() {
 		}
 		
 	});
+
+//*************************//
+// Make Square             //
+// Used to make opponent's //
+// move on own board       //
+//*************************//	
+	function makeSquare(row, col, id){
+		var sqr =[];
+		sqr.push(row, col, id);
+		return sqr;
+	}
+	
+//************************//
+// Gets what color you're //
+// playing as from server //
+//************************//
+	socket.on("joined", function(data){
+		myId = data;
+	});
+	
+//************************//
+// Makes move opponent    //
+// played from server     //
+//************************//
+	socket.on("moveMade", function(data){
+		handleLogic(data.sqrA[0], data.sqrA[1], data.sqrA[2]);
+		handleLogic(data.sqrB[0], data.sqrB[1], data.sqrB[2]);
+	});
 	
 	
 //***************************************************************************//
@@ -1450,3 +1590,14 @@ var main = function() {
 };
 
 $(document).ready(main);
+
+
+//*************************//
+// Join                    //
+// When join button is     //
+// pressed, send to server //
+//*************************//
+function join(){
+	$("#joinButton").attr('disabled', true);
+	socket.emit("playerJoining");
+}

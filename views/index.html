@@ -4,8 +4,9 @@
 		<title>Chess</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" type="text/css" href="chess.css"/>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script src="ChessLogic2.js"></script>
+		<script src="/libs/jquery-1.12.1.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/libs/ChessLogic2.js"></script>
 	</head>
 	<body>
 	
@@ -45,8 +46,13 @@
 
 		</table>
 		</div>
-		<h3 id= "toMove">White to move</h3>
-		<h3 id= "checkText"></h3>
-		<div id="buttonWrap"><button id = "playAgain">Play Again?</button></div>
+		<div id="footer">
+			<div id="joinDiv"><button id="joinButton" onclick="join()">Join</button></div>
+			<div id="footText">
+				<h3 id= "toMove">White to move</h3>
+				<h3 id= "checkText"></h3>
+			</div>
+			<div id="buttonWrap"><button id = "playAgain">Play Again?</button></div>
+		</div>
 	</body>
 </html>
