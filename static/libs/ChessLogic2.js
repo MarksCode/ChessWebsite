@@ -1565,6 +1565,19 @@ var main = function() {
 //************************//
 	socket.on("joined", function(data){
 		myId = data;
+		$("#joinButton").toggle();
+		if (myId == 1){
+			$("#byText").text("Playing as white");
+			$("#byText").css({color: '#708090'});
+		}
+		if (myId == 2){
+			$("#byText").text("Playing as black");
+			$("#byText").css({color: '#708090'});
+		}
+		if (myId == 0){
+			$("#byText").text("Game full, please refresh in a few minutes");
+			$("#byText").css({color: '#708090'});
+		}
 	});
 	
 //************************//
