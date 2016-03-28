@@ -1,8 +1,6 @@
-# ChessWebsite
+# Let's Play Chess!
 
 by Ron Marks
-
-Let's play Chess
 
 A website I built allowing two people to play chess.
 
