@@ -1,7 +1,5 @@
 # Let's Play Chess!
 
-by Ron Marks
-
 A website I built allowing two people to play chess.
 
 To see it in action (on one machine): http://people.ucsc.edu/~romarks/
